@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers } from 'redux';
 import { todos, visibilityFilter } from './reducers';
 import { AddTodo, TodoList, Footer } from './components';
-import { getVisibleTodos } from './utils'
+import VisibleTodoList from './containers/VisibleTodoList';
 
 const todoApp = combineReducers({
   todos,
@@ -20,7 +20,6 @@ const TodoApp = ({
   todos,
   visibilityFilter
 }) => {
-  const visibleTodos = getVisibleTodos(todos, visibilityFilter);
   return (
     <div>
       <AddTodo onAddClick={(text) => {
@@ -30,12 +29,7 @@ const TodoApp = ({
           text,
         });
       }}/>
-      <TodoList todos={visibleTodos} onTodoClick={(id) => {
-        store.dispatch({ type: 'TOGGLE_TODO', id, });}}/>
-      <Footer visibilityFilter={visibilityFilter} onFilterClick={(filter) => store.dispatch({
-        type: 'SET_VISIBILITY_FILTER',
-        filter,
-      })}/>
+      <VisibleTodoList store={store}/>
       </div>  
   );
 };

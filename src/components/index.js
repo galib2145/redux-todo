@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { getVisibleTodos } from '../utils'
+import { getVisibleTodos } from '../utils';
+import FilterLink from '../containers/FilterLink';
 
 const Link = ({ active, children, onClick }) => {
   if (active) {
@@ -18,38 +19,17 @@ const Link = ({ active, children, onClick }) => {
   );
 };
 
-
-const Footer = ({
-  onFilterClick,
-  visibilityFilter
-}) => {
+const Footer = ({ onFilterClick, visibilityFilter, }) => {
   return (
     <p>
-      <FilterLink 
-        filter="SHOW_ALL" 
-        currentFilter={visibilityFilter} 
-        onClick={onFilterClick}>
-        All
-      </FilterLink>{', '}
-      <FilterLink 
-        filter="SHOW_ACTIVE" 
-        currentFilter={visibilityFilter} 
-        onClick={onFilterClick}>
-        Active
-      </FilterLink>{', '}
-      <FilterLink 
-        filter="SHOW_COMPLETED" 
-        currentFilter={visibilityFilter} 
-        onClick={onFilterClick}>
-        Completed
-      </FilterLink>
+      <FilterLink filter="SHOW_ALL">All</FilterLink>{', '}
+      <FilterLink filter="SHOW_ACTIVE">Active</FilterLink>{', '}
+      <FilterLink filter="SHOW_COMPLETED">Completed</FilterLink>
     </p> 
   );
 };
 
-const AddTodo = ({
-  onAddClick
-}) => {
+const AddTodo = ({ onAddClick }) => {
   let input;
   return (
     <div>
@@ -71,10 +51,7 @@ const Todo = ({
       onClick={onClick}>{text}</li>);
 };
 
-const TodoList = ({
-  todos,
-  onTodoClick
-}) => {
+const TodoList = ({ todos, onTodoClick }) => {
   return (
     <ul>
       {todos.map(todo => <Todo key={todo.id} {...todo} onClick={() => onTodoClick(todo.id)} ></Todo>)}

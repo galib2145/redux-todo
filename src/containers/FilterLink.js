@@ -1,8 +1,10 @@
-import { Link } from '../components'
+import { Link } from '../components';
+import { Component, React } from 'react';
+
 
 class FilterLink extends Component {
   componentDidMount() {
-    store.subscribe(() => { 
+    this.props.store.subscribe(() => { 
       this.unsubscribe = this.forceUpdate();
     });    
   }
@@ -12,6 +14,7 @@ class FilterLink extends Component {
   }
 
   render() {
+    const store = this.props.store;
     const filter = this.props.filter;
     const currentFilter = store.getState().visibilityFilter;
 
@@ -26,3 +29,5 @@ class FilterLink extends Component {
     );  
   }    
 }
+
+export default FilterLink;
