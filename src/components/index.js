@@ -3,24 +3,21 @@ import ReactDOM from 'react-dom';
 
 import { getVisibleTodos } from '../utils'
 
-const FilterLink = ({
-  filter, 
-  currentFilter, 
-  children,
-  onClick
-}) => {
-  if (filter === currentFilter) {
-    return <span>{children}</span>
+const Link = ({ active, children, onClick }) => {
+  if (active) {
+    return <span>{children}</span>;
   }
+
   return (
     <a href="#" onClick={(e) => {
         e.preventDefault();
-        onClick(filter);
+        onClick();
       }}>
       {children}
     </a>  
   );
 };
+
 
 const Footer = ({
   onFilterClick,
@@ -85,4 +82,4 @@ const TodoList = ({
   );
 };
 
-export { FilterLink, Footer, AddTodo, Todo, TodoList };
+export { Link, Footer, AddTodo, Todo, TodoList };
