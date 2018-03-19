@@ -19,25 +19,28 @@ const Link = ({ active, children, onClick }) => {
   );
 };
 
-const Footer = ({ onFilterClick, visibilityFilter, }) => {
+const Footer = ({ store }) => {
   return (
     <p>
-      <FilterLink filter="SHOW_ALL">All</FilterLink>{', '}
-      <FilterLink filter="SHOW_ACTIVE">Active</FilterLink>{', '}
-      <FilterLink filter="SHOW_COMPLETED">Completed</FilterLink>
+      <FilterLink store={store} filter="SHOW_ALL">All</FilterLink>{', '}
+      <FilterLink store={store} filter="SHOW_ACTIVE">Active</FilterLink>{', '}
+      <FilterLink store={store} filter="SHOW_COMPLETED">Completed</FilterLink>
     </p> 
   );
 };
 
-const AddTodo = ({ onAddClick }) => {
+const AddTodo = ({ store }) => {
   let input;
   return (
     <div>
       <input ref={(node) => input = node }/>
       <button onClick={() => {
-            onAddClick(input.value);
-            input.value = '';
-          }}>Add todo
+        store.dispatch({
+          type: 'ADD_TODO',
+          text: input.value,
+        });
+        input.value = '';
+      }}>Add todo
        </button>
     </div>);
 };

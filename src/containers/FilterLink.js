@@ -1,6 +1,6 @@
 import { Link } from '../components';
-import { Component, React } from 'react';
-
+import React from 'react';
+import { Component } from 'react';
 
 class FilterLink extends Component {
   componentDidMount() {
