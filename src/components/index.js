@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { getVisibleTodos } from '../utils';
-import FilterLink from '../containers/FilterLink';
 
 let nextTodoId = 1;
 
@@ -23,23 +22,13 @@ const Link = ({ active, children, onClick }) => {
   );
 };
 
-const Footer = ({ store }) => {
-  return (
-    <p>
-      <FilterLink store={store} filter="SHOW_ALL">All</FilterLink>{', '}
-      <FilterLink store={store} filter="SHOW_ACTIVE">Active</FilterLink>{', '}
-      <FilterLink store={store} filter="SHOW_COMPLETED">Completed</FilterLink>
-    </p> 
-  );
-};
-
-const AddTodo = (props, { store }) => {
+let AddTodo = ({ dispatch }) => {
   let input;
   return (
     <div>
       <input ref={(node) => input = node }/>
       <button onClick={() => {
-        store.dispatch({
+        dispatch({
           type: 'ADD_TODO',
           text: input.value,
           id: nextTodoId++,
@@ -50,9 +39,7 @@ const AddTodo = (props, { store }) => {
     </div>);
 };
 
-AddTodo.contextTypes = {
-  store: PropTypes.object,
-};
+AddTodo = connect()(AddTodo);
 
 const Todo = ({
   text,
@@ -71,4 +58,4 @@ const TodoList = ({ todos, onTodoClick }) => {
   );
 };
 
-export { Link, Footer, AddTodo, Todo, TodoList };
+export { Link, AddTodo, Todo, TodoList };

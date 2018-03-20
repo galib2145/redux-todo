@@ -6,9 +6,10 @@ import PropTypes from 'prop-types';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers } from 'redux';
 import { todos, visibilityFilter } from './reducers';
-import { AddTodo, Footer } from './components';
+import { AddTodo } from './components';
 import { Provider } from 'react-redux' 
 import VisibleTodoList from './containers/VisibleTodoList';
+import FilterLink from './containers/FilterLink';
 
 const todoApp = combineReducers({
   todos,
@@ -16,6 +17,17 @@ const todoApp = combineReducers({
 });
 
 const store = createStore(todoApp);
+
+const Footer = ({ store }) => {
+  return (
+    <p>
+      <FilterLink store={store} filter="SHOW_ALL">All</FilterLink>{', '}
+      <FilterLink store={store} filter="SHOW_ACTIVE">Active</FilterLink>{', '}
+      <FilterLink store={store} filter="SHOW_COMPLETED">Completed</FilterLink>
+    </p> 
+  );
+};
+
 
 const TodoApp = () => {
   return (
