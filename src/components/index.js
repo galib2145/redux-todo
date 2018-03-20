@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import { getVisibleTodos } from '../utils';
 import FilterLink from '../containers/FilterLink';
