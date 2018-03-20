@@ -7,6 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers } from 'redux';
 import { todos, visibilityFilter } from './reducers';
 import { AddTodo, Footer } from './components';
+import { Provider } from 'react-redux' 
 import VisibleTodoList from './containers/VisibleTodoList';
 
 const todoApp = combineReducers({
@@ -15,22 +16,6 @@ const todoApp = combineReducers({
 });
 
 const store = createStore(todoApp);
-
-class Provider extends React.Component {
-  getChildContext() {
-    return {
-      store: this.props.store,
-    }
-  }
-
-  render() {
-    return this.props.children;
-  }
-}
-
-Provider.childContextTypes = {
-  store: PropTypes.object,
-};
 
 const TodoApp = () => {
   return (
