@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 import { getVisibleTodos } from '../utils';
 import FilterLink from '../containers/FilterLink';
+
+let nextTodoId = 1;
 
 const Link = ({ active, children, onClick }) => {
   if (active) {
@@ -29,7 +32,7 @@ const Footer = ({ store }) => {
   );
 };
 
-const AddTodo = ({ store }) => {
+const AddTodo = (props, { store }) => {
   let input;
   return (
     <div>
@@ -38,11 +41,16 @@ const AddTodo = ({ store }) => {
         store.dispatch({
           type: 'ADD_TODO',
           text: input.value,
+          id: nextTodoId++,
         });
         input.value = '';
       }}>Add todo
        </button>
     </div>);
+};
+
+AddTodo.contextTypes = {
+  store: PropTypes.object,
 };
 
 const Todo = ({

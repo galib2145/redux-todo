@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import PropTypes from 'prop-types';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers } from 'redux';
 import { todos, visibilityFilter } from './reducers';
@@ -15,20 +16,37 @@ const todoApp = combineReducers({
 
 const store = createStore(todoApp);
 
-let nextTodoId = 1;
+class Provider extends React.Component {
+  getChildContext() {
+    return {
+      store: this.props.store,
+    }
+  }
+
+  render() {
+    return this.props.children;
+  }
+}
+
+Provider.childContextTypes = {
+  store: PropTypes.object,
+};
+
 const TodoApp = () => {
   return (
     <div>
-      <AddTodo store={store}/>
-      <VisibleTodoList store={store}/>
-      <Footer store={store}/>
+      <AddTodo/>
+      <VisibleTodoList/>
+      <Footer/>
     </div>  
   );
 };
 
 const render = () => {
   ReactDOM.render(
-    <TodoApp {...store.getState()}/>,
+    <Provider store={store}>
+      <TodoApp {...store.getState()}/>
+    </Provider>,
     document.getElementById('root')
   );
 };
