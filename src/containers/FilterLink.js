@@ -4,9 +4,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { Link } from '../components';
-
-console.log('Here');
-console.log(Link);
+import { setVisibilityFilter } from '../action_creators';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -17,12 +15,9 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onClick: () => {
-      dispatch({
-        type: 'SET_VISIBILITY_FILTER',
-        filter: ownProps.filter,
-      });
+      dispatch(setVisibilityFilter(ownProps.filter));
     },
-  }
+  };
 };
 
 const FilterLink = connect(

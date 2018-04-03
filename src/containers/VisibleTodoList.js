@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import { TodoList } from '../components'
 import { getVisibleTodos } from '../utils'
+import { toggleTodo } from '../action_creators';
 
 const mapStateToProps = (state) => {
   return {
@@ -18,10 +19,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
      onTodoClick: (id) => {
-       dispatch({
-         id,
-         type: 'TOGGLE_TODO',
-       })
+       dispatch(toggleTodo(id))
      },
   }
 };

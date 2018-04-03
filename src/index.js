@@ -7,7 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers } from 'redux';
 import { todos, visibilityFilter } from './reducers';
 import { AddTodo } from './components';
-import { Provider } from 'react-redux' 
+import { Provider } from 'react-redux'; 
 import VisibleTodoList from './containers/VisibleTodoList';
 import FilterLink from './containers/FilterLink';
 

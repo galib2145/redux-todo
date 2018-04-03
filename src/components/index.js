@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { getVisibleTodos } from '../utils';
 
-let nextTodoId = 1;
+import { addTodo } from '../action_creators';
 
 const Link = ({ active, children, onClick }) => {
   if (active) {
@@ -28,11 +28,7 @@ let AddTodo = ({ dispatch }) => {
     <div>
       <input ref={(node) => input = node }/>
       <button onClick={() => {
-        dispatch({
-          type: 'ADD_TODO',
-          text: input.value,
-          id: nextTodoId++,
-        });
+        dispatch(addTodo(input.value));
         input.value = '';
       }}>Add todo
        </button>
