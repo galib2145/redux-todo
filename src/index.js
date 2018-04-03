@@ -11,23 +11,26 @@ import { Provider } from 'react-redux';
 import VisibleTodoList from './containers/VisibleTodoList';
 import FilterLink from './containers/FilterLink';
 
-const todoApp = combineReducers({
-  todos,
-  visibilityFilter,
-});
+const persistedState = {
+  todos: [{
+    id: 1,
+    text: 'Welcome back!',
+    completed: true,
+  }],
+};
 
-const store = createStore(todoApp);
+const todoApp = combineReducers({ todos, visibilityFilter, });
+const store = createStore(todoApp, persistedState);
 
-const Footer = ({ store }) => {
+const Footer = () => {
   return (
     <p>
-      <FilterLink store={store} filter="SHOW_ALL">All</FilterLink>{', '}
-      <FilterLink store={store} filter="SHOW_ACTIVE">Active</FilterLink>{', '}
-      <FilterLink store={store} filter="SHOW_COMPLETED">Completed</FilterLink>
+      <FilterLink filter="SHOW_ALL">All</FilterLink>{', '}
+      <FilterLink filter="SHOW_ACTIVE">Active</FilterLink>{', '}
+      <FilterLink filter="SHOW_COMPLETED">Completed</FilterLink>
     </p> 
   );
 };
-
 
 const TodoApp = () => {
   return (
